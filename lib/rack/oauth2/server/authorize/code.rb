@@ -23,9 +23,13 @@ module Rack
 
           class Response < Authorize::Response
             attr_required :code
+            attr_optional :session_state
 
             def protocol_params
-              super.merge(:code => code)
+              super.merge(
+                :code => code,
+                :session_state => session_state
+              )
             end
 
             def protocol_params_location
